@@ -2,7 +2,7 @@
 
 namespace AKlump\Taskcamp\API;
 
-class Entity implements EntityInterface {
+class Entity implements EntityInterface, \JsonSerializable {
 
   protected $data = [];
 
@@ -84,6 +84,13 @@ class Entity implements EntityInterface {
     $this->data['body'] = $body;
 
     return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function jsonSerialize() {
+    return $this->data;
   }
 
 }
