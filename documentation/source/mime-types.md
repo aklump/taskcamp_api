@@ -4,7 +4,8 @@
 
 This is used to represent a taskcamp entity (in this case a bug) and looks like this:
 
-        <bug projectId=0d6c69da-3167-11e9-901e-69eb3dc3eca4/>
+        <bug projectId="0d6c69da-3167-11e9-901e-69eb3dc3eca4"/>
+        ---
         url: 'http://seao.local.loft/'
         screen:
             width: 1152
@@ -13,12 +14,6 @@ This is used to represent a taskcamp entity (in this case a bug) and looks like 
             pixelDepth: 24
             orientation: 270
         device: mac
-        browser:
-            name: chrome
-            version: 76.0.3809.100
-        os:
-            name: macosx
-            version: 10.13.6
         ---
         # asdfsadf
         
@@ -35,6 +30,29 @@ This is used to represent a taskcamp entity (in this case a bug) and looks like 
 * The markdown section MUST contain an top-level title, e.g. `# Some Object Title`
 * The markdown section MAY contain indefinite additional markdown text.
 
+### Relaxed Mode
+
+Relaxed mode allows for less typing.
+
+* Header closing is optional.
+* Header properties MUST only be wrapped in quotes when the value contains a space, otherwise quotes MAY be omitted.
+* YAML frontmatter does not need to be preceeded by a `---` line.
+
+Here's the above example in relaxed mode:
+
+                <bug projectId=0d6c69da-3167-11e9-901e-69eb3dc3eca4>
+                url: 'http://seao.local.loft/'
+                screen:
+                    width: 1152
+                    height: 2048
+                    colorDepth: 24
+                    pixelDepth: 24
+                    orientation: 270
+                device: mac
+                ---
+                # asdfsadf
+                
+                safsafsa
 
 ## application/prs.taskcamp.cmd+text
 

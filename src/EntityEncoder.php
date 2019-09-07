@@ -26,6 +26,18 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
    * @throws UnexpectedValueException
    */
   public function encode($data, $format, array $context = []) {
+
+    $context += [
+      'mode' => 'strict',
+    ];
+    if ($context['mode'] = 'strict') {
+      $context = [
+          'self_closing' => TRUE,
+          'quote_properties' => TRUE,
+          'frontmatter_prefix' => TRUE,
+        ] + $context;
+    }
+
     $lines = [];
 
     // Header.
@@ -33,16 +45,20 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
     if (!empty($data['properties'])) {
       $properties = [];
       foreach ($data['properties'] as $name => $value) {
-        $properties[] = "$name=" . (strstr($value, ' ') === FALSE ? $value : "\"$value\"");
+        $properties[] = "$name=" . (strstr($value, ' ') === FALSE && $context['quote_properties'] === FALSE ? $value : "\"$value\"");
       }
       $properties = ' ' . implode(' ', $properties);
     }
-    $lines[] = "<{$data['type']}{$properties}/>";
+    $self_closing = $context['self_closing'] ? '/' : '';
+    $lines[] = "<{$data['type']}{$properties}{$self_closing}>";
 
     if (!empty($data['data'])) {
+      if ($context['frontmatter_prefix']) {
+        $lines[] = '---';
+      }
       $lines[] = trim(Yaml::dump($data['data']), PHP_EOL);
+      $lines[] = '---';
     }
-    $lines[] = '---';
 
     $lines[] = '# ' . $data['title'];
     $lines[] = NULL;
