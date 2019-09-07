@@ -1,6 +1,6 @@
 <?php
 
-namespace AKlump\Taskcamp\Api;
+namespace AKlump\Taskcamp\API;
 
 use Symfony\Component\Serializer\Encoder\DecoderInterface;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;

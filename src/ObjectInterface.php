@@ -1,11 +1,11 @@
 <?php
 
-namespace AKlump\Taskcamp\Api;
+namespace AKlump\Taskcamp\API;
 
 /**
  * Interface ObjectInterface.
  *
- * @package AKlump\Taskcamp\Api
+ * @package AKlump\Taskcamp\API
  */
 interface ObjectInterface {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace AKlump\Taskcamp\Api;
+namespace AKlump\Taskcamp\API;
 
 class Object implements ObjectInterface {
 
