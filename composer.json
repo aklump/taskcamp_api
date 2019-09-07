@@ -16,7 +16,7 @@
         }
     },
     "require": {
-        "symfony/serializer": "^3",
-        "symfony/yaml": "^3"
+        "symfony/serializer": "^3.4",
+        "symfony/yaml": "^3.4"
     }
 }
