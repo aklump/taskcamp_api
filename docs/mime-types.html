@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Taskcamp MIME Types</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--mime-types">
+<header>
+  <div class="pager"><a href="README.html" class="prev README">&laquo;Taskcamp Api</a><a href="index.html" class="index pager__book-title"></a><a href="index.html" class="next index">Index&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Taskcamp MIME Types</h1>
+
+<section>
+
+<h2>application/prs.taskcamp.obj</h2>
+
+<p>This is used to represent a taskcamp entity (in this case a bug) and looks like this:</p>
+
+<pre><code>    &lt;bug projectId=0d6c69da-3167-11e9-901e-69eb3dc3eca4&gt;
+    url: 'http://seao.local.loft/'
+    screen:
+        width: 1152
+        height: 2048
+        colorDepth: 24
+        pixelDepth: 24
+        orientation: 270
+    device: mac
+    browser:
+        name: chrome
+        version: 76.0.3809.100
+    os:
+        name: macosx
+        version: 10.13.6
+    ---
+    # asdfsadf
+
+    safsafsa
+</code></pre>
+
+<ul>
+<li>The document consists  of three sections: pseudo-HTML header, YAML frontmatter, markdown</li>
+<li>The header MUST be present and MUST be contained on a single line</li>
+<li>The header MUST be a pseudo-html open tag that defines the type of object, in the example the object is a <code>bug</code>.</li>
+<li>The header MAY have one or more attribute/values; the values MAY be wrapped in double or single quotes.  If an attribute value contains a space, it MUST be wrapper in single or double quotes.</li>
+<li>The YAML frontmatter MAY begin with 3 or more <code>-</code> characters, or this line MAY be omitted.</li>
+<li>The metadata section MAY be present, which is YAML and can be as many lines as you'd like.</li>
+<li>The YAML frontmatter MUST end with 3 or more <code>-</code> characters.</li>
+<li>The markdown section MUST contain an top-level title, e.g. <code># Some Object Title</code></li>
+<li>The markdown section MAY contain indefinite additional markdown text.</li>
+</ul>
+
+<h2>application/prs.taskcamp.cmd+text</h2>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="README.html" class="prev README">&laquo;Taskcamp Api</a><a href="index.html" class="index pager__book-title"></a><a href="index.html" class="next index">Index&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 1.0 &bull; Last Updated: Sat, 07 Sep 2019 13:57:53 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+
