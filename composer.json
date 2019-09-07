@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "AKlump\\Taskcamp\\": "src\/"
+            "AKlump\\Taskcamp\\API\\": "src\/"
         }
     },
     "require": {
