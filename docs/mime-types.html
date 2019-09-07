@@ -25,11 +25,12 @@
 
 <section>
 
-<h2>application/prs.taskcamp.obj</h2>
+<h2>application/prs.taskcamp.entity</h2>
 
 <p>This is used to represent a taskcamp entity (in this case a bug) and looks like this:</p>
 
-<pre><code>    &lt;bug projectId=0d6c69da-3167-11e9-901e-69eb3dc3eca4&gt;
+<pre><code>    &lt;bug projectId="0d6c69da-3167-11e9-901e-69eb3dc3eca4"/&gt;
+    ---
     url: 'http://seao.local.loft/'
     screen:
         width: 1152
@@ -38,12 +39,6 @@
         pixelDepth: 24
         orientation: 270
     device: mac
-    browser:
-        name: chrome
-        version: 76.0.3809.100
-    os:
-        name: macosx
-        version: 10.13.6
     ---
     # asdfsadf
 
@@ -51,9 +46,10 @@
 </code></pre>
 
 <ul>
-<li>The document consists  of three sections: pseudo-HTML header, YAML frontmatter, markdown</li>
+<li>The document consists  of three sections: an "HTML" open tag, YAML frontmatter, markdown</li>
 <li>The header MUST be present and MUST be contained on a single line</li>
-<li>The header MUST be a pseudo-html open tag that defines the type of object, in the example the object is a <code>bug</code>.</li>
+<li>The header MUST be a pseudo-html open tag that defines the type of object, in the example the object is a <code>bug</code>.  It should be a self-closing tag.</li>
+<li>Neither the header nor the entire document use an "HTML" closing tag</li>
 <li>The header MAY have one or more attribute/values; the values MAY be wrapped in double or single quotes.  If an attribute value contains a space, it MUST be wrapper in single or double quotes.</li>
 <li>The YAML frontmatter MAY begin with 3 or more <code>-</code> characters, or this line MAY be omitted.</li>
 <li>The metadata section MAY be present, which is YAML and can be as many lines as you'd like.</li>
@@ -61,6 +57,33 @@
 <li>The markdown section MUST contain an top-level title, e.g. <code># Some Object Title</code></li>
 <li>The markdown section MAY contain indefinite additional markdown text.</li>
 </ul>
+
+<h3>Relaxed Mode</h3>
+
+<p>Relaxed mode allows for less typing.</p>
+
+<ul>
+<li>Header closing is optional.</li>
+<li>Header properties MUST only be wrapped in quotes when the value contains a space, otherwise quotes MAY be omitted.</li>
+<li>YAML frontmatter does not need to be preceeded by a <code>---</code> line.</li>
+</ul>
+
+<p>Here's the above example in relaxed mode:</p>
+
+<pre><code>            &lt;bug projectId=0d6c69da-3167-11e9-901e-69eb3dc3eca4&gt;
+            url: 'http://seao.local.loft/'
+            screen:
+                width: 1152
+                height: 2048
+                colorDepth: 24
+                pixelDepth: 24
+                orientation: 270
+            device: mac
+            ---
+            # asdfsadf
+
+            safsafsa
+</code></pre>
 
 <h2>application/prs.taskcamp.cmd+text</h2>
 </section>
@@ -72,7 +95,7 @@
 <footer>
   <div class="pager"><a href="README.html" class="prev README">&laquo;Taskcamp Api</a><a href="index.html" class="index pager__book-title"></a><a href="index.html" class="next index">Index&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 1.0 &bull; Last Updated: Sat, 07 Sep 2019 14:00:10 -0700</p>
+    <p class="legaleeze center">Version: 1.0 &bull; Last Updated: Sat, 07 Sep 2019 14:24:27 -0700</p>
   </div>
 </footer>
 
