@@ -4,7 +4,7 @@ namespace AKlump\Taskcamp\API;
 
 class MimeTypes {
 
-  const OBJECT = 'application/prs.taskcamp.obj';
+  const ENTITY = 'application/prs.taskcamp.entity';
 
   const COMMAND = 'application/prs.taskcamp.cmd+text';
 
