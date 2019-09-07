@@ -1,0 +1,22 @@
+{
+    "name": "aklump/taskcamp_api",
+    "license": "BSD",
+    "description": "Defines a common API for working with the Taskcamp Project Management system by In the Loft Studios.",
+    "version": "0.1",
+    "authors": [
+        {
+            "name": "Aaron Klump",
+            "email": "sourcecode@intheloftstudios.com",
+            "role": "developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "AKlump\\Taskcamp\\Api\\": "src\/"
+        }
+    },
+    "require": {
+        "symfony/serializer": "^4.3",
+        "symfony/yaml": "^4.3"
+    }
+}
