@@ -2,7 +2,7 @@
 
 namespace AKlump\Taskcamp\API;
 
-class Object implements ObjectInterface {
+class Entity implements EntityInterface {
 
   protected $data = [];
 
@@ -44,7 +44,7 @@ class Object implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function setType(string $type): ObjectInterface {
+  public function setType(string $type): EntityInterface {
     $this->data['type'] = $type;
 
     return $this;
@@ -53,7 +53,7 @@ class Object implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function setProperties(array $properties): ObjectInterface {
+  public function setProperties(array $properties): EntityInterface {
     $this->data['properties'] = $properties;
 
     return $this;
@@ -62,7 +62,7 @@ class Object implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function setData(array $data): ObjectInterface {
+  public function setData(array $data): EntityInterface {
     $this->data['data'] = $data;
 
     return $this;
@@ -71,7 +71,7 @@ class Object implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function setTitle(string $title): ObjectInterface {
+  public function setTitle(string $title): EntityInterface {
     $this->data['title'] = $title;
 
     return $this;
@@ -80,7 +80,7 @@ class Object implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function setBody(string $body): ObjectInterface {
+  public function setBody(string $body): EntityInterface {
     $this->data['body'] = $body;
 
     return $this;

@@ -10,7 +10,7 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * An encoder/decoder for application/prs.taskcamp.obj MIME types.
  */
-class ObjectEncoder implements EncoderInterface, DecoderInterface {
+class EntityEncoder implements EncoderInterface, DecoderInterface {
 
   /**
    * Encodes data into the given format.
