@@ -12,6 +12,8 @@ use Symfony\Component\Yaml\Yaml;
  */
 class EntityEncoder implements EncoderInterface, DecoderInterface {
 
+  const TYPE = 'taskcamp_entity';
+
   /**
    * Encodes data into the given format.
    *
@@ -57,9 +59,7 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
    * @return bool
    */
   public function supportsEncoding($format) {
-    $short = str_replace('application/prs.', '', MimeTypes::OBJECT);
-
-    return $format === MimeTypes::OBJECT || $format === $short;
+    return $format === self::TYPE;
   }
 
 
