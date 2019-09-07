@@ -1,10 +1,10 @@
 # Taskcamp MIME Types
 
-## application/prs.taskcamp.obj
+## application/prs.taskcamp.entity
 
 This is used to represent a taskcamp entity (in this case a bug) and looks like this:
 
-        <bug projectId=0d6c69da-3167-11e9-901e-69eb3dc3eca4>
+        <bug projectId=0d6c69da-3167-11e9-901e-69eb3dc3eca4/>
         url: 'http://seao.local.loft/'
         screen:
             width: 1152
@@ -24,9 +24,10 @@ This is used to represent a taskcamp entity (in this case a bug) and looks like 
         
         safsafsa
 
-* The document consists  of three sections: pseudo-HTML header, YAML frontmatter, markdown
+* The document consists  of three sections: an "HTML" open tag, YAML frontmatter, markdown
 * The header MUST be present and MUST be contained on a single line
-* The header MUST be a pseudo-html open tag that defines the type of object, in the example the object is a `bug`.
+* The header MUST be a pseudo-html open tag that defines the type of object, in the example the object is a `bug`.  It should be a self-closing tag.
+* Neither the header nor the entire document use an "HTML" closing tag
 * The header MAY have one or more attribute/values; the values MAY be wrapped in double or single quotes.  If an attribute value contains a space, it MUST be wrapper in single or double quotes.
 * The YAML frontmatter MAY begin with 3 or more `-` characters, or this line MAY be omitted.
 * The metadata section MAY be present, which is YAML and can be as many lines as you'd like.

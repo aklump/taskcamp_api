@@ -8,7 +8,7 @@ use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * An encoder/decoder for application/prs.taskcamp.obj MIME types.
+ * An encoder/decoder for application/prs.taskcamp.entity MIME types.
  */
 class EntityEncoder implements EncoderInterface, DecoderInterface {
 
@@ -37,7 +37,7 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
       }
       $properties = ' ' . implode(' ', $properties);
     }
-    $lines[] = "<{$data['type']}{$properties}>";
+    $lines[] = "<{$data['type']}{$properties}/>";
 
     if (!empty($data['data'])) {
       $lines[] = trim(Yaml::dump($data['data']), PHP_EOL);
@@ -104,7 +104,7 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
 
     if ($has_header) {
       $header = array_shift($lines);
-      preg_match('/<\s*([a-z]+)\s+(.+)>/', $header, $matches);
+      preg_match('/<\s*([a-z]+)\s+(.+)\/?>/', $header, $matches);
       $decoded['type'] = $matches[1];
       preg_match_all('/(.+)=(.+)/', $matches[2], $matches2, PREG_SET_ORDER);
       foreach ($matches2 as $item) {
