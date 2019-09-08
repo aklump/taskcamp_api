@@ -1,0 +1,29 @@
+{
+    "name": "@aklump/taskcamp_api",
+    "title": "Taskcamp Api",
+    "version": "0.1.1",
+    "main": "./dist/TaskcampApi.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/aklump/taskcamp_api.git"
+    },
+    "files": [
+        "README*",
+        "LICENSE",
+        "CHANGELOG*",
+        "tests",
+        "dist",
+        "docs"
+    ],
+    "keywords": [],
+    "author": "aklump",
+    "license": "BSD-3-Clause",
+    "bugs": {
+        "url": "https://github.com/aklump/taskcamp_api/issues"
+    },
+    "homepage": "http://www.intheloftstudios.com/packages/js/taskcamp_api",
+    "description": "Defines a common API for working with the Taskcamp Project Management system by In the Loft Studios.",
+    "dependencies": {
+        "js-yaml": "^3.13.1"
+    }
+}
