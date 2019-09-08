@@ -124,12 +124,9 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
       preg_match('/<\s*([a-z]+)(?:\s+(.+))?\/?>/', $header, $matches);
       $decoded['type'] = $matches[1];
       if (!empty($matches[2])) {
-        preg_match_all('/(.+)=(.+)/', $matches[2], $matches2, PREG_SET_ORDER);
+        preg_match_all('/([^ ]+)=(?:["\'](.+?)["\']|([^ ]+))/', $matches[2], $matches2, PREG_SET_ORDER);
         foreach ($matches2 as $item) {
-          $value = $item[2];
-          $value = preg_replace('/^["\']/', '', $value);
-          $value = preg_replace('/["\']$/', '', $value);
-          $decoded['properties'][$item[1]] = $value;
+          $decoded['properties'][$item[1]] = $item[2];
         }
       }
     }
@@ -155,7 +152,7 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
       $decoded['body'] = implode(PHP_EOL, $lines);
     }
 
-    if (!preg_match('/^\s*#([^#].+)\n\s*(.*)/', $decoded['body'], $matches)) {
+    if (!preg_match('/^\s*#([^#].+)\n?\s*(.*)/', $decoded['body'], $matches)) {
       throw new SyntaxErrorException("The body must being with a heading designated with a single hash (#) followed by a string of text.");
     }
     $decoded['title'] = trim($matches[1]);

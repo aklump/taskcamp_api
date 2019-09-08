@@ -24,6 +24,7 @@ This is used to represent a taskcamp entity (in this case a bug) and looks like 
 * The header MUST be a pseudo-html open tag that defines the type of object, in the example the object is a `bug`.  It should be a self-closing tag.
 * Neither the header nor the entire document use an "HTML" closing tag
 * The header MAY have one or more attribute/values; the values MAY be wrapped in double or single quotes.  If an attribute value contains a space, it MUST be wrapper in single or double quotes.
+* Attributes SHOULD be used to convey non-human data about the entity, such as database ids, or related ids.  YAML frontmatter should be used to convey data that a human may be interested in viewing.
 * The YAML frontmatter MAY begin with 3 or more `-` characters, or this line MAY be omitted.
 * The metadata section MAY be present, which is YAML and can be as many lines as you'd like.
 * The YAML frontmatter MUST end with 3 or more `-` characters.
