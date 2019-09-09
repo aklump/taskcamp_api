@@ -2,7 +2,7 @@
     "name": "aklump\/taskcamp_api",
     "license": "BSD-3-Clause",
     "description": "Defines a common API for working with the Taskcamp Project Management system by In the Loft Studios.",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "authors": [
         {
             "name": "Aaron Klump",
