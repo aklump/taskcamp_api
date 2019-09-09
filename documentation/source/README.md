@@ -83,3 +83,15 @@ And this is how that format looks:
     # Augment the footer with another section
     
     In order to fit in the about section in the footer, we need to create a fourth column that can take a custom block.  The block needs to be added to the region so the client can edit it.
+
+## Javascript
+
+@todo
+
+### Installation
+
+    yarn add @aklump/taskcamp_api
+
+Or if not using _yarn_:
+
+    npm install @aklump/taskcamp_api
