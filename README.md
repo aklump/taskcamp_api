@@ -4,24 +4,82 @@
 
 ## Summary
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac blandit risus. Mauris tempor a lacus a placerat. Vivamus viverra dapibus metus non finibus. Nulla ultricies est nulla, eget efficitur nibh viverra non. Sed sed est viverra nunc malesuada venenatis vitae at tellus. Suspendisse potenti. Morbi non blandit elit, sit amet consectetur mi.
+This is the core API library for Taskcamp, by [In the Loft Studios](https://www.intheloftstudios.com).  It should be used by clients wishing to work with this application.
 
-**Visit <https://aklump.github.io/taskcamp_api> for full documentation.**
+At the heart, it defines a new serialzation format which is a combination of HTML, YAML, and markdown to represent complicated data relationships, which look like the following.   See [this page](@te-mime) for more info.
 
-## Quick Start
+The corresponding MIME type is: `application/prs.taskcamp.entity`.
 
-## Requirements
+    <type property="123"/>
+    ---
+    attribute: value
+    ---
+    # title
+    
+    body
 
-* alpha
-* bravo
+## PHP
 
-## Contributing
+### Installation
 
-If you find this project useful... please consider [making a donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4E5KZHDQCEUV8&item_name=Gratitude%20for%20aklump%2Ftaskcamp_api).
+    composer require aklump/taskcamp_api
 
-## Installation
+### Usage
 
-1. lorem
-1. ipsum
+#### Deserialize
 
-## Usage
+This is what a JSON representation of an `\AKlump\Taskcamp\API\Entity` looks like:
+
+    {
+        "type": "bug",
+        "properties": {
+            "projectName": "My Project",
+            "projectId": 123
+        },
+        "data": {
+            "device": "mac",
+            "os": {
+                "name": "macosx",
+                "version": "10.13.6"
+            }
+        },
+        "title": "The title has too much top margin",
+        "body": ""
+    }
+    
+Here is how you would deserialize a JSON string, like the one above.
+
+    use AKlump\Taskcamp\API\Entity;
+    use AKlump\Taskcamp\API\EntityEncoder;
+    use AKlump\Taskcamp\API\EntitySerializer;
+    
+    $serializer = new EntitySerializer();
+    $entity = $serializer->deserialize($json, Entity::class, 'json');
+    
+If the data was encoded in another format you would use either of these:    
+
+    $entity = $serializer->deserialize($entity_markup, Entity::class, EntityEncoder::TYPE);
+    $entity = $serializer->deserialize($xml, Entity::class, 'xml');
+
+#### Serialize
+
+Here's how you would serialize an object into `EntityEncoder::TYPE` format.
+
+    $entity = new Entity();
+    $entity
+        ->setType('feature')
+        ->setTitle('Augment the footer with another section')
+        ->setBody('In order to fit in the about section in the footer, we need to create a fourth column that can take a custom block.  The block needs to be added to the region so the client can edit it.')
+        ->setProperties(['projectId' => 123])
+        ->setData(['prioritye' => 'high']);
+    $markup = $serializer->serialize($entity, EntityEncoder::TYPE);
+          
+And this is how that format looks:
+
+    <feature projectId="123"/>
+    ---
+    priority: high
+    ---
+    # Augment the footer with another section
+    
+    In order to fit in the about section in the footer, we need to create a fourth column that can take a custom block.  The block needs to be added to the region so the client can edit it.

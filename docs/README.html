@@ -9,7 +9,7 @@
 
 <body class="page--readme">
 <header>
-  <div class="pager"><a href="CHANGELOG.html" class="prev CHANGELOG">&laquo;Changelog</a><a href="index.html" class="index pager__book-title"></a><a href="mime-types.html" class="next mime-types">Taskcamp MIME Types&raquo;</a></div></header>
+  <div class="pager"><a href="CHANGELOG.html" class="prev CHANGELOG">&laquo;Changelog</a><a href="index.html" class="index pager__book-title"></a><a href="mime-types.html" class="next te-mime">Taskcamp MIME Types&raquo;</a></div></header>
 <section class="sub-header">
   <div class="breadcrumbs"><a href="index.html">Index</a>
          &raquo
@@ -29,31 +29,92 @@
 
 <h2>Summary</h2>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac blandit risus. Mauris tempor a lacus a placerat. Vivamus viverra dapibus metus non finibus. Nulla ultricies est nulla, eget efficitur nibh viverra non. Sed sed est viverra nunc malesuada venenatis vitae at tellus. Suspendisse potenti. Morbi non blandit elit, sit amet consectetur mi.</p>
+<p>This is the core API library for Taskcamp, by <a href="https://www.intheloftstudios.com">In the Loft Studios</a>.  It should be used by clients wishing to work with this application.</p>
 
-<p><strong>Visit <a href="https://aklump.github.io/taskcamp_api">https://aklump.github.io/taskcamp_api</a> for full documentation.</strong></p>
+<p>At the heart, it defines a new serialzation format which is a combination of HTML, YAML, and markdown to represent complicated data relationships, which look like the following.   See <a href="mime-types.html">this page</a> for more info.</p>
 
-<h2>Quick Start</h2>
+<p>The corresponding MIME type is: <code>application/prs.taskcamp.entity</code>.</p>
 
-<h2>Requirements</h2>
+<pre><code>&lt;type property="123"/&gt;
+---
+attribute: value
+---
+# title
 
-<ul>
-<li>alpha</li>
-<li>bravo</li>
-</ul>
+body
+</code></pre>
 
-<h2>Contributing</h2>
+<h2>PHP</h2>
 
-<p>If you find this project useful... please consider <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=4E5KZHDQCEUV8&amp;item_name=Gratitude%20for%20aklump%2Ftaskcamp_api">making a donation</a>.</p>
+<h3>Installation</h3>
 
-<h2>Installation</h2>
+<pre><code>composer require aklump/taskcamp_api
+</code></pre>
 
-<ol>
-<li>lorem</li>
-<li>ipsum</li>
-</ol>
+<h3>Usage</h3>
 
-<h2>Usage</h2>
+<h4>Deserialize</h4>
+
+<p>This is what a JSON representation of an <code>\AKlump\Taskcamp\API\Entity</code> looks like:</p>
+
+<pre><code>{
+    "type": "bug",
+    "properties": {
+        "projectName": "My Project",
+        "projectId": 123
+    },
+    "data": {
+        "device": "mac",
+        "os": {
+            "name": "macosx",
+            "version": "10.13.6"
+        }
+    },
+    "title": "The title has too much top margin",
+    "body": ""
+}
+</code></pre>
+
+<p>Here is how you would deserialize a JSON string, like the one above.</p>
+
+<pre><code>use AKlump\Taskcamp\API\Entity;
+use AKlump\Taskcamp\API\EntityEncoder;
+use AKlump\Taskcamp\API\EntitySerializer;
+
+$serializer = new EntitySerializer();
+$entity = $serializer-&gt;deserialize($json, Entity::class, 'json');
+</code></pre>
+
+<p>If the data was encoded in another format you would use either of these:</p>
+
+<pre><code>$entity = $serializer-&gt;deserialize($entity_markup, Entity::class, EntityEncoder::TYPE);
+$entity = $serializer-&gt;deserialize($xml, Entity::class, 'xml');
+</code></pre>
+
+<h4>Serialize</h4>
+
+<p>Here's how you would serialize an object into <code>EntityEncoder::TYPE</code> format.</p>
+
+<pre><code>$entity = new Entity();
+$entity
+    -&gt;setType('feature')
+    -&gt;setTitle('Augment the footer with another section')
+    -&gt;setBody('In order to fit in the about section in the footer, we need to create a fourth column that can take a custom block.  The block needs to be added to the region so the client can edit it.')
+    -&gt;setProperties(['projectId' =&gt; 123])
+    -&gt;setData(['prioritye' =&gt; 'high']);
+$markup = $serializer-&gt;serialize($entity, EntityEncoder::TYPE);
+</code></pre>
+
+<p>And this is how that format looks:</p>
+
+<pre><code>&lt;feature projectId="123"/&gt;
+---
+priority: high
+---
+# Augment the footer with another section
+
+In order to fit in the about section in the footer, we need to create a fourth column that can take a custom block.  The block needs to be added to the region so the client can edit it.
+</code></pre>
 </section>
 
 <div class="search__results">
@@ -61,9 +122,9 @@
 </div>
 
 <footer>
-  <div class="pager"><a href="CHANGELOG.html" class="prev CHANGELOG">&laquo;Changelog</a><a href="index.html" class="index pager__book-title"></a><a href="mime-types.html" class="next mime-types">Taskcamp MIME Types&raquo;</a></div>  
+  <div class="pager"><a href="CHANGELOG.html" class="prev CHANGELOG">&laquo;Changelog</a><a href="index.html" class="index pager__book-title"></a><a href="mime-types.html" class="next te-mime">Taskcamp MIME Types&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 1.0 &bull; Last Updated: Sun, 08 Sep 2019 10:01:12 -0700</p>
+    <p class="legaleeze center">Version: 1.0 &bull; Last Updated: Mon, 09 Sep 2019 11:32:17 -0700</p>
   </div>
 </footer>
 

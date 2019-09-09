@@ -1,3 +1,6 @@
+---
+id: te-mime
+---
 # Taskcamp MIME Types
 
 ## application/prs.taskcamp.entity
@@ -6,7 +9,7 @@ This is used to represent a taskcamp entity (in this case a bug) and looks like 
 
         <bug projectId="0d6c69da-3167-11e9-901e-69eb3dc3eca4"/>
         ---
-        url: 'http://seao.local.loft/'
+        url: 'http://website.local.loft/'
         screen:
             width: 1152
             height: 2048
@@ -42,7 +45,7 @@ Relaxed mode allows for less typing.
 Here's the above example in relaxed mode:
 
                 <bug projectId=0d6c69da-3167-11e9-901e-69eb3dc3eca4>
-                url: 'http://seao.local.loft/'
+                url: 'http://website.local.loft/'
                 screen:
                     width: 1152
                     height: 2048
@@ -57,3 +60,4 @@ Here's the above example in relaxed mode:
 
 ## application/prs.taskcamp.cmd+text
 
+@todo
