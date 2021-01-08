@@ -10,35 +10,35 @@ class Entity implements EntityInterface, \JsonSerializable {
    * {@inheritdoc}
    */
   public function getType(): string {
-    return $this->data['type'];
+    return $this->data['type'] ?? '';
   }
 
   /**
    * {@inheritdoc}
    */
   public function getProperties(): array {
-    return $this->data['properties'];
+    return $this->data['properties'] ?? [];
   }
 
   /**
    * {@inheritdoc}
    */
   public function getData(): array {
-    return $this->data['data'];
+    return $this->data['data'] ?? [];
   }
 
   /**
    * {@inheritdoc}
    */
   public function getTitle(): string {
-    return $this->data['title'];
+    return $this->data['title'] ? '';
   }
 
   /**
    * {@inheritdoc}
    */
   public function getBody(): string {
-    return $this->data['body'];
+    return $this->data['body'] ?? '';
   }
 
   /**
