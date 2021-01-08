@@ -69,7 +69,7 @@ function getData() {
   data = data.split('\n')
   data.shift()
   data = data.join('\n')
-  return jsyaml.safeLoad(data) || {}
+  return jsyaml.load(data) || {}
 }
 
 function getTitle() {
