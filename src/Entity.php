@@ -93,4 +93,18 @@ class Entity implements EntityInterface, \JsonSerializable {
     return $this->data;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getDatum(string $datum, $default) {
+    return $this->getData[$datum] ?? $default;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getProperty(string $property, $default) {
+    return $this->getProperties()[$property] ?? $default;
+  }
+
 }

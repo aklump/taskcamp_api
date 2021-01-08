@@ -13,7 +13,11 @@ interface EntityInterface {
 
   public function getData(): array;
 
+  public function getDatum(string $datum, $default);
+
   public function getProperties(): array;
+
+  public function getProperty(string $property, $default);
 
   public function getTitle(): string;
 
