@@ -97,7 +97,7 @@ class Entity implements EntityInterface, \JsonSerializable {
    * {@inheritdoc}
    */
   public function getDatum(string $datum, $default) {
-    return $this->getData[$datum] ?? $default;
+    return $this->getData()[$datum] ?? $default;
   }
 
   /**
