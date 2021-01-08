@@ -31,7 +31,7 @@ class Entity implements EntityInterface, \JsonSerializable {
    * {@inheritdoc}
    */
   public function getTitle(): string {
-    return $this->data['title'] ? '';
+    return $this->data['title'] ?? '';
   }
 
   /**
