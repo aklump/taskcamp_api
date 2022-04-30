@@ -24,5 +24,8 @@
     "description": "Defines a common API for working with the Taskcamp Project Management system by In the Loft Studios.",
     "dependencies": {
         "js-yaml": "^4.0.0"
+    },
+    "devDependencies": {
+        "prettier": "2.6.2"
     }
 }

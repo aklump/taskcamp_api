@@ -3,20 +3,19 @@ const jsyaml = require('js-yaml')
 let source
 let element
 
-function EntityEncoder() {
-}
+function EntityEncoder() {}
 
 EntityEncoder.prototype.TYPE = 'taskcamp_entity'
 
-EntityEncoder.prototype.supportsDecoding = function(format) {
+EntityEncoder.prototype.supportsDecoding = function (format) {
   return format === this.TYPE
 }
 
-EntityEncoder.prototype.supportsEncoding = function(format) {
+EntityEncoder.prototype.supportsEncoding = function (format) {
   return false
 }
 
-EntityEncoder.prototype.decode = function(data, format) {
+EntityEncoder.prototype.decode = function (data, format) {
   source = data.trim()
 
   // Create an object of the first line, which is an XML tag.

@@ -1,6 +1,6 @@
-# Taskcamp Api
+# Taskcamp API
 
-![Taskcamp Api](docs/images/taskcamp-api.jpg)
+![Taskcamp API](docs/images/taskcamp-api.jpg)
 
 ## Summary
 
