@@ -8,7 +8,7 @@ use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 /**
- * A configured serializer class for Entity.
+ * A configured serializer class for an \AKlump\Taskcamp\API\EntityInterface.
  */
 class EntitySerializer extends Serializer {
 
