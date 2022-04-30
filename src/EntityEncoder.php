@@ -21,6 +21,7 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
    * @param string $format Format name
    *   Only one format is supported, 'taskcamp_entity'.
    * @param array $context Options that normalizers/encoders have access to
+   *   - mode string One of relaxed|strict.
    *
    * @return string
    *
@@ -31,13 +32,11 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
     $context += [
       'mode' => 'strict',
     ];
-    if ($context['mode'] = 'strict') {
-      $context = [
-          'self_closing' => TRUE,
-          'quote_properties' => TRUE,
-          'frontmatter_prefix' => TRUE,
-        ] + $context;
-    }
+    $context = [
+        'self_closing' => $context['mode'] === 'strict',
+        'quote_properties' => $context['mode'] === 'strict',
+        'frontmatter_prefix' => $context['mode'] === 'strict',
+      ] + $context;
 
     $lines = [];
 
@@ -50,6 +49,7 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
       }
       $properties = ' ' . implode(' ', $properties);
     }
+
     $self_closing = $context['self_closing'] ? '/' : '';
 
     if (empty($data['type'])) {
@@ -66,10 +66,13 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
     }
 
     $lines[] = '# ' . $data['title'];
-    $lines[] = NULL;
-    $lines[] = trim($data['body'], PHP_EOL);
 
-    return implode(PHP_EOL, $lines);
+    $body = trim($data['body'], PHP_EOL);
+    if ($body) {
+      $lines[] = PHP_EOL . $body;
+    }
+
+    return trim(implode(PHP_EOL, $lines), PHP_EOL) . PHP_EOL;
   }
 
   /**
@@ -139,18 +142,23 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
         break;
 
       case 2:
+      default:
         list($header, $frontmatter, $decoded['body']) = explode("---\n", $data, 3);
         $header = trim($header);
         break;
-
-      default:
-        throw new SyntaxErrorException();
     }
 
     // Parse the header and properties.
     preg_match('/<\s*([a-z]+)(?:\s+(.+))?\/?>/', $header, $matches);
+    if (!$matches) {
+      throw new SyntaxErrorException('Missing or malformed header');
+    }
     $decoded['type'] = $matches[1];
     if (!empty($matches[2])) {
+      $has_unquoted_spaces = preg_match('/=[^"\s]+ [^">]/', $matches[2]);
+      if ($has_unquoted_spaces) {
+        throw new SyntaxErrorException('Property values containing spaces must be double quoted.');
+      }
       parse_str($matches[2], $parsed);
 
       // Typecast and trip quotes from properties.
@@ -170,7 +178,7 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
     }
 
     // Make sure the body has a title and move it.
-    preg_match('/^#\s*([^\n]+)(?:\n\s*(.+))?/s', $decoded['body'], $matches);
+    preg_match('/^#\s*([^#][^\n]+)(?:\n\s*(.+))?/s', $decoded['body'], $matches);
     if (empty($matches[1])) {
       throw new SyntaxErrorException("The body must being with a heading designated with a single hash (#) followed by a string of text.");
     }

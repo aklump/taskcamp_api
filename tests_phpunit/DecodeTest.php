@@ -1,17 +1,30 @@
 <?php
 
+use AKlump\Taskcamp\API\EntityEncoder;
+use AKlump\Taskcamp\API\SyntaxErrorException;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \AKlump\Taskcamp\API\EntityEncoder
  */
-final class EntityEncoderTest extends TestCase {
+final class DecodeTest extends TestCase {
 
   /**
    * Provides data for testDecodeTypeWorksReturnsArrayForVariations.
    */
   public function serializedDataProvider() {
     $tests = [];
+
+    $tests[] = [
+      "<bug>\n---\nfoo: bar\n---\n# Title\n\n## Subtitle\n---\n\nlorem ipsum.",
+      [
+        'type' => 'bug',
+        'title' => 'Title',
+        'body' => "## Subtitle\n---\n\nlorem ipsum.",
+        'data' => ['foo' => 'bar'],
+        'properties' => [],
+      ],
+    ];
 
     $tests[] = [
       "\n\n\n<bug>\n---\n---\n#The Beginning\n\n\n\n",
@@ -67,6 +80,19 @@ final class EntityEncoderTest extends TestCase {
           'size' => 'large',
         ],
         'properties' => ['id' => 123],
+      ],
+    ];
+    $tests[] = [
+      "<feature id=\"step up\">\n---\ncolor: red\nsize: large\n---\n#Title\n\n\n\n",
+      [
+        'type' => 'feature',
+        'title' => 'Title',
+        'body' => '',
+        'data' => [
+          'color' => 'red',
+          'size' => 'large',
+        ],
+        'properties' => ['id' => 'step up'],
       ],
     ];
 
@@ -129,7 +155,7 @@ final class EntityEncoderTest extends TestCase {
    * @dataProvider serializedDataProvider
    */
   public function testDecodeTypeWorksReturnsArrayForVariations($serialized_data, $control) {
-    $obj = new \AKlump\Taskcamp\API\EntityEncoder();
+    $obj = new EntityEncoder();
     $data = $obj->decode($serialized_data, 'taskcamp_entity');
     $this->assertIsArray($data);
     foreach (array_keys($control) as $key) {
@@ -137,9 +163,39 @@ final class EntityEncoderTest extends TestCase {
     }
   }
 
-  public function testEncodeMissingTypeThrows() {
-    $this->expectException(\AKlump\Taskcamp\API\SyntaxErrorException::class);
-    $obj = new \AKlump\Taskcamp\API\EntityEncoder();
-    $this->assertIsString($obj->encode([], ''));
+  public function testUnquotedSpaceOneProperyThrows() {
+    $this->expectException(SyntaxErrorException::class);
+    $serialized_data = "<bug name=Rin Tin/>\n# My Pets";
+    $obj = new EntityEncoder();
+    $obj->decode($serialized_data, 'taskcamp_entity');
   }
+
+  public function testUnquotedSpacePropertiesThrows() {
+    $this->expectException(SyntaxErrorException::class);
+    $serialized_data = "<bug name=Rin Tin city=Kansas City>\n# My Pets";
+    $obj = new EntityEncoder();
+    $obj->decode($serialized_data, 'taskcamp_entity');
+  }
+
+  public function testMissingHeaderThrows() {
+    $this->expectException(SyntaxErrorException::class);
+    $serialized_data = "# Title";
+    $obj = new EntityEncoder();
+    $obj->decode($serialized_data, 'taskcamp_entity');
+  }
+
+  public function testHeaderOnlyThrows() {
+    $this->expectException(SyntaxErrorException::class);
+    $serialized_data = "<bug>";
+    $obj = new EntityEncoder();
+    $obj->decode($serialized_data, 'taskcamp_entity');
+  }
+
+  public function testMissingTitleThrows() {
+    $this->expectException(SyntaxErrorException::class);
+    $serialized_data = "<bug>\n## No title";
+    $obj = new EntityEncoder();
+    $obj->decode($serialized_data, 'taskcamp_entity');
+  }
+
 }

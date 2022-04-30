@@ -4,3 +4,4 @@
 /documentation/README.md
 /node_modules/
 /.phpdoc
+/.phpunit.result.cache
