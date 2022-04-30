@@ -19,13 +19,14 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
    *
    * @param mixed $data Data to encode
    * @param string $format Format name
+   *   Only one format is supported, 'taskcamp_entity'.
    * @param array $context Options that normalizers/encoders have access to
    *
-   * @return string|int|float|bool
+   * @return string
    *
    * @throws UnexpectedValueException
    */
-  public function encode($data, $format, array $context = []) {
+  public function encode($data, $format, array $context = []): string {
 
     $context += [
       'mode' => 'strict',
@@ -50,6 +51,10 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
       $properties = ' ' . implode(' ', $properties);
     }
     $self_closing = $context['self_closing'] ? '/' : '';
+
+    if (empty($data['type'])) {
+      throw new SyntaxErrorException('Missing entity type');
+    }
     $lines[] = "<{$data['type']}{$properties}{$self_closing}>";
 
     if (!empty($data['data'])) {
@@ -95,6 +100,7 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
    *
    * @param string $data Data to decode
    * @param string $format Format name
+   *   Only one format is supported, 'taskcamp_entity'.
    * @param array $context Options that decoders have access to
    *
    * The format parameter specifies which format the data is in; valid values
@@ -112,51 +118,64 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
       'properties' => [],
       'data' => [],
     ];
+
+    // Preprocess whitespace.
     $data = str_replace("\r\n", PHP_EOL, $data);
-    $lines = explode(PHP_EOL, $data);
-    $has_header = preg_match('/^<[^<]+>*$/', trim($lines[0]));
-    $has_frontmatter = count(array_filter($lines, function ($item) {
-        return substr($item, 0, 3) === '---';
-      })) > 0;
+    $data = trim($data);
 
-    if ($has_header) {
-      $header = array_shift($lines);
-      preg_match('/<\s*([a-z]+)(?:\s+(.+))?\/?>/', $header, $matches);
-      $decoded['type'] = $matches[1];
-      if (!empty($matches[2])) {
-        preg_match_all('/([^ ]+)=(?:["\'](.+?)["\']|([^ ]+))/', $matches[2], $matches2, PREG_SET_ORDER);
-        foreach ($matches2 as $item) {
-          $decoded['properties'][$item[1]] = $item[2];
+    // Divide into major sections.
+    preg_match_all('/^\-\-\-/m', $data, $matches);
+    $frontmatter = NULL;
+    switch (count($matches[0])) {
+      case 0:
+        $data = explode("\n", $data, 2);
+        $header = $data[0];
+        $decoded['body'] = $data[1] ?? '';
+        break;
+
+      case 1:
+        list($header, $decoded['body']) = explode("---\n", $data, 2);
+        $header = trim($header);
+        break;
+
+      case 2:
+        list($header, $frontmatter, $decoded['body']) = explode("---\n", $data, 3);
+        $header = trim($header);
+        break;
+
+      default:
+        throw new SyntaxErrorException();
+    }
+
+    // Parse the header and properties.
+    preg_match('/<\s*([a-z]+)(?:\s+(.+))?\/?>/', $header, $matches);
+    $decoded['type'] = $matches[1];
+    if (!empty($matches[2])) {
+      parse_str($matches[2], $parsed);
+
+      // Typecast and trip quotes from properties.
+      $decoded['properties'] = array_map(function ($value) {
+        $value = trim($value, '"');
+        if (is_numeric($value)) {
+          $value *= 1;
         }
-      }
+
+        return $value;
+      }, $parsed);
     }
 
-    // Remove optional top line beginning with "---".
-    if ($has_frontmatter) {
-      if (substr($lines[0], 0, 3) === '---') {
-        array_shift($lines);
-      }
-      $has_frontmatter = !preg_match('/^#[^#]/', $lines[0]);
-      $decoded['body'] = implode(PHP_EOL, $lines);
-      if ($has_frontmatter) {
-        $lines = explode('---', $decoded['body']) + ['', ''];
-        if (count($lines) > 2) {
-          throw new SyntaxErrorException("Only one frontmatter section is allowed; remove the extra lines beginning with ---.");
-        }
-        list($decoded['data'], $decoded['body']) = $lines;
 
-        $decoded['data'] = Yaml::parse($decoded['data']);
-      }
-    }
-    else {
-      $decoded['body'] = implode(PHP_EOL, $lines);
+    if ($frontmatter) {
+      $decoded['data'] = Yaml::parse($frontmatter);
     }
 
-    if (!preg_match('/^\s*#([^#].+)\n?\s*(.*)/', $decoded['body'], $matches)) {
+    // Make sure the body has a title and move it.
+    preg_match('/^#\s*([^\n]+)(?:\n\s*(.+))?/s', $decoded['body'], $matches);
+    if (empty($matches[1])) {
       throw new SyntaxErrorException("The body must being with a heading designated with a single hash (#) followed by a string of text.");
     }
-    $decoded['title'] = trim($matches[1]);
-    $decoded['body'] = trim($matches[2]);
+    $decoded['title'] = $matches[1];
+    $decoded['body'] = $matches[2] ?? '';
 
     return $decoded;
   }
