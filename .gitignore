@@ -1,7 +1,5 @@
 /vendor
 /.idea
-/documentation/core
-/documentation/README.md
 /node_modules/
 /.phpdoc
-/.phpunit.result.cache
+reports/

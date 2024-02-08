@@ -1,10 +1,15 @@
+<!--
+id: readme
+tags: ''
+-->
+
 # Taskcamp API
 
-![Taskcamp API](images/taskcamp-api.jpg)
+![Taskcamp API](../../images/taskcamp.jpg)
 
 ## Summary
 
-This is the core API library for Taskcamp, by [In the Loft Studios](https://www.intheloftstudios.com).  It should be used by clients wishing to work with this application.
+This is the core API library for Taskcamp, by [In the Loft Studios](https://www.intheloftstudios.com).  It should be used by API clients wishing to work with this application.
 
 At the heart, it defines a new serialzation format which is a combination of HTML, YAML, and markdown to represent complicated data relationships, which look like the following.   See [this page](@te-mime) for more info.
 
