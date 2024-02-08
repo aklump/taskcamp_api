@@ -3,3 +3,6 @@
 /node_modules/
 /.phpdoc
 reports/
+
+# Temporary ignore while we determine if this should be continued.
+src/Command*
