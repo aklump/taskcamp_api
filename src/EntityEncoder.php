@@ -25,10 +25,9 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
    *
    * @return string
    *
-   * @throws UnexpectedValueException
+   * @throws \Symfony\Component\Serializer\Exception\UnexpectedValueException
    */
-  public function encode($data, $format, array $context = []): string {
-
+  public function encode($data, string $format, array $context = []) {
     $context += [
       'mode' => 'strict',
     ];
@@ -55,7 +54,7 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
     if (empty($data['type'])) {
       throw new SyntaxErrorException('Missing entity type');
     }
-    $lines[] = "<{$data['type']}{$properties}{$self_closing}>";
+    $lines[] = "<{$data['type']}$properties$self_closing>";
 
     if (!empty($data['data'])) {
       if ($context['frontmatter_prefix']) {
@@ -82,7 +81,7 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
    *
    * @return bool
    */
-  public function supportsEncoding($format) {
+  public function supportsEncoding(string $format): bool {
     return $format === self::TYPE;
   }
 
@@ -113,7 +112,7 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
    *
    * @return mixed
    *
-   * @throws UnexpectedValueException
+   * @throws \Symfony\Component\Serializer\Exception\UnexpectedValueException
    */
   public function decode($data, $format, array $context = []) {
     $decoded = [

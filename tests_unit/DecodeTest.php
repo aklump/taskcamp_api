@@ -12,7 +12,7 @@ final class DecodeTest extends TestCase {
   /**
    * Provides data for testDecodeTypeWorksReturnsArrayForVariations.
    */
-  public function serializedDataProvider() {
+  public static function serializedDataProvider() {
     $tests = [];
 
     $tests[] = [

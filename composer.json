@@ -1,25 +1,26 @@
 {
-    "name": "aklump\/taskcamp_api",
-    "license": "BSD-3-Clause",
-    "description": "Defines a common API for working with the Taskcamp Project Management system by In the Loft Studios.",
-    "version": "0.2.0",
-    "authors": [
-        {
-            "name": "Aaron Klump",
-            "email": "sourcecode@intheloftstudios.com",
-            "role": "developer"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "AKlump\\Taskcamp\\API\\": "src\/"
-        }
-    },
-    "require": {
-        "symfony\/serializer": "^3.4|^4.3",
-        "symfony\/yaml": "^3.4|^4.3"
-    },
-    "require-dev": {
-        "phpunit\/phpunit": "^9.5"
+  "name": "aklump/taskcamp_api",
+  "license": "BSD-3-Clause",
+  "description": "Defines a common API for working with the Taskcamp Project Management system by In the Loft Studios.",
+  "version": "0.2.0",
+  "authors": [
+    {
+      "name": "Aaron Klump",
+      "email": "sourcecode@intheloftstudios.com",
+      "role": "developer"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "AKlump\\Taskcamp\\API\\": "src\/"
+    }
+  },
+  "require": {
+    "symfony\/serializer": "^3|^4|^5",
+    "symfony\/yaml": "^3|^4|^5"
+  },
+  "require-dev": {
+    "phpunit\/phpunit": "^9.5",
+    "aklump/phpswap": "^0.0.7"
+  }
 }
