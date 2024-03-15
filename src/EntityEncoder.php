@@ -2,6 +2,9 @@
 
 namespace AKlump\Taskcamp\API;
 
+use AKlump\Taskcamp\API\Helpers\ExplodeDocument;
+use AKlump\Taskcamp\API\Helpers\ExtractTitle;
+use AKlump\Taskcamp\API\Helpers\ParseElement;
 use Symfony\Component\Serializer\Encoder\DecoderInterface;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
@@ -27,7 +30,7 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
    *
    * @throws \Symfony\Component\Serializer\Exception\UnexpectedValueException
    */
-  public function encode($data, string $format, array $context = []) {
+  public function encode(mixed $data, string $format, array $context = []): string {
     $context += [
       'mode' => 'strict',
     ];
@@ -85,7 +88,6 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
     return $format === self::TYPE;
   }
 
-
   /**
    * Checks whether the deserializer can decode from given format.
    *
@@ -110,79 +112,27 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
    * are encouraged to document which formats they support in a non-inherited
    * phpdoc comment.
    *
-   * @return mixed
+   * @return array
    *
-   * @throws \Symfony\Component\Serializer\Exception\UnexpectedValueException
+   * @throws \AKlump\Taskcamp\API\SyntaxErrorException
+   * @inheritdoc
    */
-  public function decode($data, $format, array $context = []) {
-    $decoded = [
-      'type' => '',
-      'properties' => [],
-      'data' => [],
-    ];
-
-    // Preprocess whitespace.
-    $data = str_replace("\r\n", PHP_EOL, $data);
-    $data = trim($data);
-
-    // Divide into major sections.
-    preg_match_all('/^\-\-\-/m', $data, $matches);
-    $frontmatter = NULL;
-    switch (count($matches[0])) {
-      case 0:
-        $data = explode("\n", $data, 2);
-        $header = $data[0];
-        $decoded['body'] = $data[1] ?? '';
-        break;
-
-      case 1:
-        list($header, $decoded['body']) = explode("---\n", $data, 2);
-        $header = trim($header);
-        break;
-
-      case 2:
-      default:
-        list($header, $frontmatter, $decoded['body']) = explode("---\n", $data, 3);
-        $header = trim($header);
-        break;
+  public function decode(string $data, string $format, array $context = []) {
+    $doc = (new ExplodeDocument())($data);
+    if (empty($doc[EntityInterface::ELEMENT])) {
+      throw new SyntaxErrorException("The document is missing the XML self-closing element.");
+    }
+    $decoded['body'] = $doc[EntityInterface::CONTENT];
+    $decoded['title'] = (new ExtractTitle())($decoded['body']);
+    if (empty($decoded['title'])) {
+      throw new SyntaxErrorException("The body must contain one heading designated with a single hash (#) followed by a string of text.");
     }
 
-    // Parse the header and properties.
-    preg_match('/<\s*([a-z]+)(?:\s+(.+))?\/?>/', $header, $matches);
-    if (!$matches) {
-      throw new SyntaxErrorException('Missing or malformed header');
-    }
-    $decoded['type'] = $matches[1];
-    if (!empty($matches[2])) {
-      $has_unquoted_spaces = preg_match('/=[^"\s]+ [^">]/', $matches[2]);
-      if ($has_unquoted_spaces) {
-        throw new SyntaxErrorException('Property values containing spaces must be double quoted.');
-      }
-      parse_str($matches[2], $parsed);
+    $element = (new ParseElement())($doc[EntityInterface::ELEMENT]);
+    $decoded['type'] = $element->name;
+    $decoded['properties'] = $element->attributes;
 
-      // Typecast and trip quotes from properties.
-      $decoded['properties'] = array_map(function ($value) {
-        $value = trim($value, '"');
-        if (is_numeric($value)) {
-          $value *= 1;
-        }
-
-        return $value;
-      }, $parsed);
-    }
-
-
-    if ($frontmatter) {
-      $decoded['data'] = Yaml::parse($frontmatter);
-    }
-
-    // Make sure the body has a title and move it.
-    preg_match('/^#\s*([^#][^\n]+)(?:\n\s*(.+))?/s', $decoded['body'], $matches);
-    if (empty($matches[1])) {
-      throw new SyntaxErrorException("The body must being with a heading designated with a single hash (#) followed by a string of text.");
-    }
-    $decoded['title'] = $matches[1];
-    $decoded['body'] = $matches[2] ?? '';
+    $decoded['data'] = $doc[EntityInterface::DATA] ? Yaml::parse($doc[EntityInterface::DATA]) : [];
 
     return $decoded;
   }

@@ -1,13 +1,38 @@
 <?php
 
+namespace AKlump\Taskcamp\API\Tests\Unit;
+
 use AKlump\Taskcamp\API\EntityEncoder;
 use AKlump\Taskcamp\API\SyntaxErrorException;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \AKlump\Taskcamp\API\EntityEncoder
+ * @uses   \AKlump\Taskcamp\API\Helpers\ExplodeDocument
+ * @uses   \AKlump\Taskcamp\API\Helpers\GuessSectionType
+ * @uses   \AKlump\Taskcamp\API\Helpers\ParseElement
+ * @uses   \AKlump\Taskcamp\API\Helpers\ExtractTitle
  */
 final class DecodeTest extends TestCase {
+
+  public function dataFortestSupportsDecodingWorksAsExpectedProvider() {
+    $tests = [];
+    $tests[] = [
+      TRUE,
+      'taskcamp_entity',
+      FALSE,
+      'csv',
+    ];
+
+    return $tests;
+  }
+
+  /**
+   * @dataProvider dataFortestSupportsDecodingWorksAsExpectedProvider
+   */
+  public function testSupportsDecodingWorksAsExpected(bool $expected, string $format) {
+    $this->assertSame($expected, (new EntityEncoder())->supportsDecoding($format));
+  }
 
   /**
    * Provides data for testDecodeTypeWorksReturnsArrayForVariations.
@@ -53,7 +78,7 @@ final class DecodeTest extends TestCase {
       [
         'type' => 'feature',
         'title' => 'Title',
-        'body' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\n## Checklist\n\n- do this\n- do that\n\n## Subheader\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        'body' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\n## Checklist\n\n- do this\n- do that\n\n## Subheader\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  ",
         'data' => [],
         'properties' => [],
       ],
@@ -112,7 +137,7 @@ final class DecodeTest extends TestCase {
       [
         'type' => 'feature',
         'title' => 'Title',
-        'body' => '',
+        'body' => "",
         'data' => [],
         'properties' => [],
       ],
@@ -159,7 +184,7 @@ final class DecodeTest extends TestCase {
     $data = $obj->decode($serialized_data, 'taskcamp_entity');
     $this->assertIsArray($data);
     foreach (array_keys($control) as $key) {
-      $this->assertSame($control[$key], $data[$key]);
+      $this->assertSame($control[$key], $data[$key], $key);
     }
   }
 
