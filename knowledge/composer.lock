@@ -4,25 +4,29 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d115877a71b84fe7fcb91bacedf7b3e",
+    "content-hash": "764998a4fc1fba79b23e52dc3c457845",
     "packages": [],
     "packages-dev": [
         {
             "name": "aklump/default-value",
-            "version": "0.0.3",
+            "version": "0.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aklump/default-value.git",
-                "reference": "7ac396bec07e215af24e368a4c2a6b920c9ac097"
+                "reference": "029a226cc1481337f2c8ac9929e1618922542c36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aklump/default-value/zipball/7ac396bec07e215af24e368a4c2a6b920c9ac097",
-                "reference": "7ac396bec07e215af24e368a4c2a6b920c9ac097",
+                "url": "https://api.github.com/repos/aklump/default-value/zipball/029a226cc1481337f2c8ac9929e1618922542c36",
+                "reference": "029a226cc1481337f2c8ac9929e1618922542c36",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0"
+            },
+            "require-dev": {
+                "aklump/phpswap": "^0.0.7",
+                "phpunit/phpunit": "^9.6"
             },
             "type": "library",
             "autoload": {
@@ -46,28 +50,184 @@
             "description": "Calculates the default value based on variable type, including fully-qualified classnames.",
             "support": {
                 "issues": "https://github.com/aklump/default-value/issues",
-                "source": "https://github.com/aklump/default-value/tree/0.0.3"
+                "source": "https://github.com/aklump/default-value/tree/0.0.6"
             },
-            "time": "2021-03-31T21:44:30+00:00"
+            "time": "2024-02-17T23:35:16+00:00"
         },
         {
-            "name": "aklump/json-schema",
-            "version": "dev-master",
+            "name": "aklump/gitignore",
+            "version": "0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aklump/gitignore.git",
+                "reference": "efd440eb519144ac1aafcd99d0fcba2b0f55e435"
+            },
             "dist": {
-                "type": "path",
-                "url": "/Users/aklump/Code/Packages/php/json_schema",
-                "reference": "a34b3c65d6c79713dc3a7ed9c597b24654b38dbc"
+                "type": "zip",
+                "url": "https://api.github.com/repos/aklump/gitignore/zipball/efd440eb519144ac1aafcd99d0fcba2b0f55e435",
+                "reference": "efd440eb519144ac1aafcd99d0fcba2b0f55e435",
+                "shasum": ""
             },
             "require": {
-                "aklump/default-value": "^0.0.3",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "aklump/phpswap": "^0.0.7",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AKlump\\GitIgnore\\": "src/",
+                    "AKlump\\GitIgnore\\Tests\\": "tests_unit/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Klump",
+                    "homepage": "http://www.intheloftstudios.com",
+                    "role": "Lead Developer"
+                }
+            ],
+            "description": "Small library for matching gitignore style (glob) patterns.",
+            "homepage": "https://github.com/aklump/gitignore",
+            "support": {
+                "issues": "https://github.com/aklump/gitignore/issues",
+                "source": "https://github.com/aklump/gitignore/tree/0.0.3"
+            },
+            "time": "2024-02-16T23:18:51+00:00"
+        },
+        {
+            "name": "aklump/glob",
+            "version": "0.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aklump/glob.git",
+                "reference": "1baa1d2bcfa5d71eeada4561a53b511a0fb52bb8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aklump/glob/zipball/1baa1d2bcfa5d71eeada4561a53b511a0fb52bb8",
+                "reference": "1baa1d2bcfa5d71eeada4561a53b511a0fb52bb8",
+                "shasum": ""
+            },
+            "require": {
+                "aklump/gitignore": "^0.0",
+                "crysalead/dir": "^2.0",
+                "php": ">=7.3",
+                "psr/simple-cache": "^1.0",
+                "symfony/filesystem": "^5.4"
+            },
+            "require-dev": {
+                "aklump/phpswap": "^0.0.7",
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AKlump\\Glob\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "AKlump\\Glob\\Tests\\Unit\\": "./tests_unit"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Aaron Klump",
+                    "homepage": "http://www.intheloftstudios.com",
+                    "role": "Lead Developer"
+                }
+            ],
+            "description": "File and directory path globbing.",
+            "homepage": "https://github.com/aklump/glob",
+            "support": {
+                "source": "https://github.com/aklump/glob/tree/0.0.6",
+                "issues": "https://github.com/aklump/glob/issues"
+            },
+            "time": "2024-02-17T00:34:05+00:00"
+        },
+        {
+            "name": "aklump/json-schema-loading",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aklump/json-schema-loading.git",
+                "reference": "93a00e7b51dd62748b8b7d49761bb3bd2d51e4d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aklump/json-schema-loading/zipball/93a00e7b51dd62748b8b7d49761bb3bd2d51e4d6",
+                "reference": "93a00e7b51dd62748b8b7d49761bb3bd2d51e4d6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.4 | ^8"
+            },
+            "require-dev": {
+                "aklump/phpswap": "^0.0.7",
+                "phpunit/phpunit": "^9.6",
+                "symfony/event-dispatcher": "^5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AKlump\\JsonSchema\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "AKlump\\JsonSchema\\Tests\\Unit\\": "./tests_unit"
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "JSON Schema file loaded with caching and event broadcast for runtime manipulations.",
+            "support": {
+                "source": "https://github.com/aklump/json-schema-loading/tree/0.0.1",
+                "issues": "https://github.com/aklump/json-schema-loading/issues"
+            },
+            "time": "2024-02-18T21:49:32+00:00"
+        },
+        {
+            "name": "aklump/json-schema-validation",
+            "version": "0.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aklump/json-schema-validation.git",
+                "reference": "a3eb2d033d2054e7ed06e1ec85db4cfde2e850ce"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aklump/json-schema-validation/zipball/a3eb2d033d2054e7ed06e1ec85db4cfde2e850ce",
+                "reference": "a3eb2d033d2054e7ed06e1ec85db4cfde2e850ce",
+                "shasum": ""
+            },
+            "require": {
+                "aklump/default-value": "^0.0",
                 "ext-json": "*",
                 "opis/json-schema": "^2.3",
                 "php": ">=7.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.6"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "AKlump\\JsonSchema\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "AKlump\\JsonSchema\\Tests\\Unit\\": "./tests_unit"
                 }
             },
             "authors": [
@@ -78,10 +238,12 @@
                 }
             ],
             "description": "JSON Schema validation using PHP.",
-            "homepage": "https://github.com/aklump/json-schema",
-            "transport-options": {
-                "relative": false
-            }
+            "homepage": "https://github.com/aklump/json-schema-validation",
+            "support": {
+                "source": "https://github.com/aklump/json-schema-validation/tree/0.0.6",
+                "issues": "https://github.com/aklump/json-schema-validation/issues"
+            },
+            "time": "2024-02-29T03:08:30+00:00"
         },
         {
             "name": "aklump/knowledge",
@@ -89,14 +251,17 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/aklump/Code/Packages/php/knowledge/app",
-                "reference": "85b484b5cd7515efa131fea527b7cee23036ab15"
+                "reference": "e9c5adfa6677c254c0676e790dc18e6b87621c2e"
             },
             "require": {
-                "aklump/json-schema": "@dev",
+                "aklump/glob": "^0.0",
+                "aklump/json-schema-loading": "^0.0",
+                "aklump/json-schema-validation": "^0.0",
                 "cebe/markdown": "^1.2",
                 "erusev/parsedown": "^1.7",
                 "ext-json": "*",
                 "html2text/html2text": "^4.3",
+                "jawira/case-converter": "^3.5",
                 "justinrainbow/json-schema": "^5.2",
                 "kba-team/markdown-table": "^1.1",
                 "league/flysystem": "^2.3",
@@ -104,11 +269,11 @@
                 "sebastiansulinski/string-converter": "^2|^3",
                 "symfony/console": "^5.3",
                 "symfony/event-dispatcher": "^5.4",
+                "symfony/filesystem": "^5.4",
                 "symfony/finder": "^5.3",
                 "symfony/property-access": "^5.3",
                 "symfony/yaml": "^5.3",
-                "twig/twig": "^3.3",
-                "webmozart/glob": "^4.6"
+                "twig/twig": "^3.3"
             },
             "require-dev": {
                 "composer/composer": "^2.1",
@@ -196,6 +361,49 @@
                 "source": "https://github.com/cebe/markdown"
             },
             "time": "2020-02-26T01:55:18+00:00"
+        },
+        {
+            "name": "crysalead/dir",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crysalead/dir.git",
+                "reference": "0390ac74a8f1634b1ec1adffdd118125f1271976"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crysalead/dir/zipball/0390ac74a8f1634b1ec1adffdd118125f1271976",
+                "reference": "0390ac74a8f1634b1ec1adffdd118125f1271976",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "kahlan/kahlan": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lead\\Dir\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Recursive directory scanner to locate directories and/or files in a file system",
+            "keywords": [
+                "Directory Scanner",
+                "directory",
+                "file",
+                "file system"
+            ],
+            "support": {
+                "issues": "https://github.com/crysalead/dir/issues",
+                "source": "https://github.com/crysalead/dir/tree/2.0.4"
+            },
+            "time": "2022-05-17T17:12:17+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -287,6 +495,73 @@
                 "source": "https://github.com/mtibben/html2text/tree/4.3.1"
             },
             "time": "2020-04-16T23:44:31+00:00"
+        },
+        {
+            "name": "jawira/case-converter",
+            "version": "v3.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jawira/case-converter.git",
+                "reference": "2be05b98dcb743bef60ab6f849145bd3434ed003"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jawira/case-converter/zipball/2be05b98dcb743bef60ab6f849145bd3434ed003",
+                "reference": "2be05b98dcb743bef60ab6f849145bd3434ed003",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "behat/behat": "^3.0",
+                "phpstan/phpstan": "^1.0",
+                "phpunit/phpunit": "^9.0",
+                "vimeo/psalm": "^4.0"
+            },
+            "suggest": {
+                "pds/skeleton": "PHP Package Development Standards",
+                "phing/phing": "PHP Build Tool"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jawira\\CaseConverter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jawira Portugal",
+                    "email": "dev@tugal.be"
+                }
+            ],
+            "description": "Convert strings between 13 naming conventions: Snake case, Camel case, Pascal case, Kebab case, Ada case, Train case, Cobol case, Macro case, Upper case, Lower case, Sentence case, Title case and Dot notation.",
+            "homepage": "https://jawira.github.io/case-converter/",
+            "keywords": [
+                "Ada case",
+                "Cobol case",
+                "Macro case",
+                "Train case",
+                "camel case",
+                "dot notation",
+                "kebab case",
+                "lower case",
+                "pascal case",
+                "sentence case",
+                "snake case",
+                "title case",
+                "upper case"
+            ],
+            "support": {
+                "issues": "https://github.com/jawira/case-converter/issues",
+                "source": "https://github.com/jawira/case-converter/tree/v3.5.1"
+            },
+            "time": "2022-08-14T11:40:18+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -846,6 +1121,57 @@
             "time": "2023-09-22T11:10:57+00:00"
         },
         {
+            "name": "psr/simple-cache",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\SimpleCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interfaces for simple caching",
+            "keywords": [
+                "cache",
+                "caching",
+                "psr",
+                "psr-16",
+                "simple-cache"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/simple-cache/tree/master"
+            },
+            "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
             "name": "ryakad/pandoc-php",
             "version": "v1.0.0",
             "source": {
@@ -924,12 +1250,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "3da107742fc099cc2f1c4f6c8712f56daf35dd44"
+                "reference": "39f75d9d73d0c11952fdcecf4877b4d0f62a8f6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/3da107742fc099cc2f1c4f6c8712f56daf35dd44",
-                "reference": "3da107742fc099cc2f1c4f6c8712f56daf35dd44",
+                "url": "https://api.github.com/repos/symfony/console/zipball/39f75d9d73d0c11952fdcecf4877b4d0f62a8f6e",
+                "reference": "39f75d9d73d0c11952fdcecf4877b4d0f62a8f6e",
                 "shasum": ""
             },
             "require": {
@@ -1015,7 +1341,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-03T12:11:28+00:00"
+            "time": "2024-02-20T16:33:57+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -1249,6 +1575,70 @@
             "time": "2024-01-23T13:51:25+00:00"
         },
         {
+            "name": "symfony/filesystem",
+            "version": "5.4.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/filesystem.git",
+                "reference": "b3e9cdbc8529e4fb827d3d421bde68ec6e8ed15e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/b3e9cdbc8529e4fb827d3d421bde68ec6e8ed15e",
+                "reference": "b3e9cdbc8529e4fb827d3d421bde68ec6e8ed15e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/polyfill-ctype": "~1.8",
+                "symfony/polyfill-mbstring": "~1.8",
+                "symfony/polyfill-php80": "^1.16"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Filesystem\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides basic utilities for the filesystem",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/filesystem/tree/5.4"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-03-15T10:00:48+00:00"
+        },
+        {
             "name": "symfony/finder",
             "version": "5.4.x-dev",
             "source": {
@@ -1373,7 +1763,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/1.x"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.29.0"
             },
             "funding": [
                 {
@@ -1452,7 +1842,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/1.x"
+                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.29.0"
             },
             "funding": [
                 {
@@ -1534,7 +1924,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/1.x"
+                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.29.0"
             },
             "funding": [
                 {
@@ -1558,12 +1948,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "9773676c8a1bb1f8d4340a62efe641cf76eda7ec"
+                "reference": "e5e7ddb00b859dbdf5ad8f3bbe4cd29a3a37aa34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/9773676c8a1bb1f8d4340a62efe641cf76eda7ec",
-                "reference": "9773676c8a1bb1f8d4340a62efe641cf76eda7ec",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/e5e7ddb00b859dbdf5ad8f3bbe4cd29a3a37aa34",
+                "reference": "e5e7ddb00b859dbdf5ad8f3bbe4cd29a3a37aa34",
                 "shasum": ""
             },
             "require": {
@@ -1631,7 +2021,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-29T20:11:03+00:00"
+            "time": "2024-03-14T13:49:05+00:00"
         },
         {
             "name": "symfony/polyfill-php73",
@@ -1692,7 +2082,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php73/tree/1.x"
+                "source": "https://github.com/symfony/polyfill-php73/tree/v1.29.0"
             },
             "funding": [
                 {
@@ -1773,7 +2163,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/1.x"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.29.0"
             },
             "funding": [
                 {
@@ -2213,12 +2603,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "594c548b9224b06683806806875d1583dcb7a59b"
+                "reference": "b46e93c7257fb01b7c77768210997b1e00643b91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/594c548b9224b06683806806875d1583dcb7a59b",
-                "reference": "594c548b9224b06683806806875d1583dcb7a59b",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/b46e93c7257fb01b7c77768210997b1e00643b91",
+                "reference": "b46e93c7257fb01b7c77768210997b1e00643b91",
                 "shasum": ""
             },
             "require": {
@@ -2285,57 +2675,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-25T08:27:19+00:00"
-        },
-        {
-            "name": "webmozart/glob",
-            "version": "4.7.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webmozarts/glob.git",
-                "reference": "3c17f7dec3d9d0e87b575026011f2e75a56ed655"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webmozarts/glob/zipball/3c17f7dec3d9d0e87b575026011f2e75a56ed655",
-                "reference": "3c17f7dec3d9d0e87b575026011f2e75a56ed655",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.3 || ^8.0.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.5",
-                "symfony/filesystem": "^5.3"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Webmozart\\Glob\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bernhard Schussek",
-                    "email": "bschussek@gmail.com"
-                }
-            ],
-            "description": "A PHP implementation of Ant's glob.",
-            "support": {
-                "issues": "https://github.com/webmozarts/glob/issues",
-                "source": "https://github.com/webmozarts/glob/tree/4.6.0"
-            },
-            "time": "2022-05-24T19:45:58+00:00"
+            "time": "2024-02-15T11:09:06+00:00"
         }
     ],
     "aliases": [],

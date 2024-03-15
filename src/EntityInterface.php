@@ -7,6 +7,12 @@ namespace AKlump\Taskcamp\API;
  */
 interface EntityInterface {
 
+  const ELEMENT = 'element';
+
+  const DATA = 'data';
+
+  const CONTENT = 'content';
+
   /**
    * Get the body portion of the entity.
    *

@@ -14,9 +14,18 @@
       "AKlump\\Taskcamp\\API\\": "src\/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "AKlump\\Taskcamp\\API\\Tests\\Unit\\": "tests_unit\/"
+    }
+  },
   "require": {
-    "symfony\/serializer": "^3|^4|^5",
-    "symfony\/yaml": "^3|^4|^5"
+    "php": "^8",
+    "symfony\/serializer": "^6",
+    "symfony/property-access": "^6",
+    "symfony\/yaml": "6",
+    "ext-simplexml": "*",
+    "ext-dom": "*"
   },
   "require-dev": {
     "phpunit\/phpunit": "^9.5",

@@ -13,11 +13,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - lorem
 
+## [0.3.0] - 2024-03-15
+
+### Changed
+
+- Whitespace at the end of the body is no longer removed during decoding.
+
+### Removed
+
+- Support for PHP < 8
+
 ## [0.2.0] - 2022-04-29
 
 ### Added
 
-- Test coverate for encode/decode
+- Test coverage for encode/decode
 
 ### Fixed
 
