@@ -1,5 +1,5 @@
 <!--
-id: te-mime
+id: mime
 tags: ''
 -->
 
@@ -26,15 +26,26 @@ device: mac
 safsafsa
 ```
 
-* The document consists of three sections: an "HTML" open tag, YAML frontmatter, markdown
-* The header MUST be present and MUST be contained on a single line
-* The header MUST be a pseudo-html open tag that defines the type of object, in the example the object is a `bug`. It should be a self-closing tag.
-* Neither the header nor the entire document use an "HTML" closing tag
-* The header MAY have one or more attribute/values; the values MAY be wrapped in double or single quotes. If an attribute value contains a space, it MUST be wrapper in single or double quotes.
+* The document consists of three sections: a self-closing XML element, YAML data, and markdown content
+* These three sections will be referred to as: _element_, _data_ and _content_
+
+### Element
+
+* The element MUST be present and MUST be contained on a single line
+* The element MUST be a pseudo-HTML open tag that defines the type of object, in the example the object is a `bug`. It should be a self-closing tag. We say pseudo because it
+* Neither the element nor the entire document use an "HTML" closing tag
+* The element MAY have one or more attribute/values; the values MAY be wrapped in double or single quotes. If an attribute value contains a space, it MUST be wrapper in single or double quotes.
 * Attributes SHOULD be used to convey non-human data about the entity, such as database ids, or related ids. YAML frontmatter should be used to convey data that a human may be interested in viewing.
-* The YAML frontmatter MAY begin with 3 or more `-` characters, or this line MAY be omitted.
-* The metadata section MAY be present, which is YAML and can be as many lines as you'd like.
-* The YAML frontmatter MUST end with 3 or more `-` characters.
+
+### Data
+
+* This OPTIONAL section is a YAML mapping of key/value pairs.
+* If any data is present then this section must be followed by a separator line of 3 or more dashes, `---`
+* This section may be preceded by a separator line of 3 or more dashes.
+* If there is no data, then no separator lines are required.
+
+### Content
+
 * The markdown section MUST contain an top-level title, e.g. `# Some Object Title`
 * The markdown section MAY contain indefinite additional markdown text.
 
