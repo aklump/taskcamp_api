@@ -6,7 +6,7 @@
 
 This is the core API library for Taskcamp, by [In the Loft Studios](https://www.intheloftstudios.com).  It should be used by API clients wishing to work with this application.
 
-At the heart, it defines a new serialzation format which is a combination of HTML, YAML, and markdown to represent complicated data relationships, which look like the following.   See [this page](@te-mime) for more info.
+At the heart, it defines a new serialzation format which is a combination of HTML, YAML, and markdown to represent complicated data relationships, which look like the following.   See [this page](@mime) for more info.
 
 The corresponding MIME type is: `application/prs.taskcamp.entity`.
 
@@ -71,7 +71,7 @@ Here's how you would serialize an object into `EntityEncoder::TYPE` format.
         ->setTitle('Augment the footer with another section')
         ->setBody('In order to fit in the about section in the footer, we need to create a fourth column that can take a custom block.  The block needs to be added to the region so the client can edit it.')
         ->setProperties(['projectId' => 123])
-        ->setData(['prioritye' => 'high']);
+        ->setData(['priority' => 'high']);
     $markup = $serializer->serialize($entity, EntityEncoder::TYPE);
           
 And this is how that format looks:
