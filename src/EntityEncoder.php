@@ -85,7 +85,6 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
     return $format === self::TYPE;
   }
 
-
   /**
    * Checks whether the deserializer can decode from given format.
    *
@@ -93,7 +92,7 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
    *
    * @return bool
    */
-  public function supportsDecoding($format) {
+  public function supportsDecoding(string $format) {
     return $this->supportsEncoding($format);
   }
 
@@ -114,7 +113,7 @@ class EntityEncoder implements EncoderInterface, DecoderInterface {
    *
    * @throws \Symfony\Component\Serializer\Exception\UnexpectedValueException
    */
-  public function decode($data, $format, array $context = []) {
+  public function decode(string $data, string $format, array $context = []) {
     $decoded = [
       'type' => '',
       'properties' => [],
