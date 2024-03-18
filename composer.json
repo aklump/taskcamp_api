@@ -23,7 +23,7 @@
     "php": "^8",
     "symfony\/serializer": "^6",
     "symfony/property-access": "^6",
-    "symfony\/yaml": "6",
+    "symfony\/yaml": "^6",
     "ext-simplexml": "*",
     "ext-dom": "*"
   },
