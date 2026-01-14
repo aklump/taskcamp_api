@@ -23,7 +23,7 @@
     "homepage": "http://www.intheloftstudios.com/packages/js/taskcamp_api",
     "description": "Defines a common API for working with the Taskcamp Project Management system by In the Loft Studios.",
     "dependencies": {
-        "js-yaml": "^4.0.0"
+        "js-yaml": "^4.1.1"
     },
     "devDependencies": {
         "prettier": "2.6.2"
